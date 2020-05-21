@@ -59,18 +59,22 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst(){
-        if (size == 0){return null;}
+        if (size == 0){
+            return null;
+        }
         nextFirst = onePlus(nextFirst);
         T tmp = items[nextFirst];
         items[nextFirst] = null;
         double usage = ((double) size) / items.length;
-        if ((items.length > 16) && (usage < 0.25)){shrink()};
+        if ((items.length > 16) && (usage < 0.25)){shrink();}
         size -= 1;
         return tmp;
     }
 
     public T removeLast(){
-        if (size == 0){return null;}
+        if (size == 0){
+            return null;
+        }
         nextLast = oneMinus(nextLast);
         T tmp = items[nextLast];
         items[nextLast] = null;
@@ -97,7 +101,9 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index){
-        if (index >= size){return null;}
+        if (index >= size){
+            return null;
+        }
         int pos = ((nextFirst >= nextLast) ? 1 + index - items.length + nextFirst : nextFirst + index + 1);
         return items[pos];
     }
