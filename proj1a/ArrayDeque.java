@@ -6,16 +6,16 @@ public class ArrayDeque<T> {
 
     public ArrayDeque() {
         items = (T[]) new Object[8];
-        int nextFirst = 3;
-        int nextLast = 4;
+        nextFirst = 3;
+        nextLast = 4;
         size = 0;
     }
 
-    private int onePlus(int index){
+    private int onePlus(int index) {
         return ((index == items.length - 1) ? 0 : index + 1);
     }
 
-    private int oneMinus(int index){
+    private int oneMinus(int index) {
         return ((index == 0) ? items.length - 1 : index - 1);
     }
 
@@ -26,6 +26,7 @@ public class ArrayDeque<T> {
             System.arraycopy(items,nextFirst+1,a,nextLast+3*size,size - nextLast);
         }
         nextFirst = nextLast + 3 * size - 1;
+        items = a;
         //nextLast = nextLast;
     }
 
@@ -54,6 +55,7 @@ public class ArrayDeque<T> {
             //nextLast = nextLast;
             System.arraycopy(items,0,a,0,nextLast);
             System.arraycopy(items,onePlus(nextFirst),a,nextLast+2,size-nextLast);
+            items = a;
             nextFirst = nextLast + 1;
         }
     }
