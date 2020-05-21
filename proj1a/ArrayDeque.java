@@ -21,9 +21,9 @@ public class ArrayDeque<T> {
 
     private void expand() {
         T[] a = (T[]) new Object[4 * size];
-        System.arraycopy(items,0,a,0,nextLast);
-        if (nextFirst < items.length-1) {
-            System.arraycopy(items,nextFirst+1,a,nextLast+3*size,size - nextLast);
+        System.arraycopy(items, 0, a, 0, nextLast);
+        if (nextFirst < items.length - 1) {
+            System.arraycopy(items, nextFirst + 1, a, nextLast + 3 * size, size - nextLast);
         }
         nextFirst = nextLast + 3 * size - 1;
         items = a;
@@ -49,16 +49,16 @@ public class ArrayDeque<T> {
     }
 
     private void shrink() {
-        T[] a = (T[]) new Object[size+2];
+        T[] a = (T[]) new Object[size + 2];
         if (nextFirst < nextLast) {
-            System.arraycopy(items,nextFirst+1,a,0,size);
+            System.arraycopy(items, nextFirst + 1, a, 0, size);
             items = a;
             nextFirst = 0;
             nextLast = size + 1;
         } else {
             //nextLast = nextLast;
-            System.arraycopy(items,0,a,0,nextLast);
-            System.arraycopy(items,onePlus(nextFirst),a,nextLast+2,size-nextLast);
+            System.arraycopy(items, 0, a, 0, nextLast);
+            System.arraycopy(items, onePlus(nextFirst), a,nextLast + 2,size - nextLast);
             items = a;
             nextFirst = nextLast + 1;
         }
@@ -105,7 +105,7 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int currentIndex = onePlus(nextFirst);
         while ((items[currentIndex] != null) && (currentIndex != nextLast)) {
-            System.out.print(items[currentIndex]+" ");
+            System.out.print(items[currentIndex] + " ");
             currentIndex = onePlus(currentIndex);
         }
     }
@@ -114,7 +114,13 @@ public class ArrayDeque<T> {
         if (index >= size) {
             return null;
         }
-        int pos = ((nextFirst >= nextLast) ? 1 + index - items.length + nextFirst : nextFirst + index + 1);
+        int pos;
+        pos = nextFirst + index + 1;
+        if (nextFirst >= nextLast) {
+            if (pos > items.length -1 ) {
+                pos -= items.length;
+            }
+        }
         return items[pos];
     }
 }
