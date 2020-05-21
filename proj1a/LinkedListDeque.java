@@ -1,37 +1,37 @@
 public class LinkedListDeque<T> {
-    private class node {
+    private class Node {
         /**Your class should accept any generic type (not just integers).*/
-        public T item;
-        public node prev;
-        public node next;
+        private T item;
+        private Node prev;
+        private Node next;
 
-        public node(T i, node p, node n) {
+        public Node(T i, Node p, Node n) {
             item = i;
             prev = p;
             next = n;
         }
     }
 
-    private node sentinel;
+    private Node sentinel;
     private int size;
 
     public LinkedListDeque() {
-        sentinel = new node(null,null,null);
+        sentinel = new Node(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
         size = 0;
     }
 
     public void addFirst(T item) {
-        node tmp = sentinel.next;
-        sentinel.next = new node(item, sentinel, tmp);
+        Node tmp = sentinel.next;
+        sentinel.next = new Node(item, sentinel, tmp);
         tmp.prev = sentinel.next;
         size += 1;
     }
 
     public void addLast(T item) {
-        node tmp = sentinel.prev;
-        sentinel.prev = new node(item, tmp, sentinel);
+        Node tmp = sentinel.prev;
+        sentinel.prev = new Node(item, tmp, sentinel);
         tmp.next = sentinel.prev;
         size += 1;
     }
@@ -45,7 +45,7 @@ public class LinkedListDeque<T> {
     }
 
     public void printDeque() {
-        node current  = sentinel.next;
+        Node current  = sentinel.next;
         while (current != sentinel) {
             System.out.print(current.item + " ");
             current = current.next;
@@ -56,7 +56,7 @@ public class LinkedListDeque<T> {
         if (size == 0) {
             return null;
         }
-        node tmp = sentinel.next;
+        Node tmp = sentinel.next;
         sentinel.next = tmp.next;
         tmp.next.prev = sentinel;
         tmp.next = null;
@@ -69,7 +69,7 @@ public class LinkedListDeque<T> {
         if (size == 0) {
             return null;
         }
-        node tmp = sentinel.prev;
+        Node tmp = sentinel.prev;
         sentinel.prev = tmp.prev;
         tmp.prev.next = sentinel;
         tmp.next = null;
@@ -82,19 +82,19 @@ public class LinkedListDeque<T> {
         if ((index + 1 > size) || (index < 0)) {
             return null;
         }
-        node current = sentinel;
-        while (index >= 0){
+        Node current = sentinel;
+        while (index >= 0) {
             current = current.next;
             index -= 1;
         }
         return current.item;
     }
 
-    public T getRecursiveHelper(int index, node current) {
+    private T getRecursiveHelper(int index, Node current) {
         if (index < 0) {
             return current.item;
         }
-        return getRecursiveHelper(index-1, current.next);
+        return getRecursiveHelper(index - 1, current.next);
     }
 
     public T getRecursive(int index) {
