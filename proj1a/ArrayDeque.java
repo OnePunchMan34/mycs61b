@@ -19,10 +19,10 @@ public class ArrayDeque<T> {
         return ((index == 0) ? items.length - 1 : index - 1);
     }
 
-    private void expand(){
+    private void expand() {
         T[] a = (T[]) new Object[4 * size];
         System.arraycopy(items,0,a,0,nextLast);
-        if (nextFirst < items.length-1){
+        if (nextFirst < items.length-1) {
             System.arraycopy(items,nextFirst+1,a,nextLast+3*size,size - nextLast);
         }
         nextFirst = nextLast + 3 * size - 1;
@@ -30,28 +30,32 @@ public class ArrayDeque<T> {
         //nextLast = nextLast;
     }
 
-    public void addFirst(T x){
-        if (nextFirst == nextLast){expand();}
+    public void addFirst(T x) {
+        if (nextFirst == nextLast) {
+            expand();
+        }
         items[nextFirst] = x;
         nextFirst = oneMinus(nextFirst);
         size += 1;
     }
 
-    public void addLast(T x){
-        if (nextFirst == nextLast){expand();}
+    public void addLast(T x) {
+        if (nextFirst == nextLast) {
+            expand();
+        }
         items[nextLast] = x;
         nextLast = onePlus(nextLast);
         size += 1;
     }
 
-    private void shrink(){
+    private void shrink() {
         T[] a = (T[]) new Object[size+2];
-        if (nextFirst < nextLast){
+        if (nextFirst < nextLast) {
             System.arraycopy(items,nextFirst+1,a,0,size);
             items = a;
             nextFirst = 0;
             nextLast = size + 1;
-        }else{
+        } else {
             //nextLast = nextLast;
             System.arraycopy(items,0,a,0,nextLast);
             System.arraycopy(items,onePlus(nextFirst),a,nextLast+2,size-nextLast);
@@ -60,50 +64,54 @@ public class ArrayDeque<T> {
         }
     }
 
-    public T removeFirst(){
-        if (size == 0){
+    public T removeFirst() {
+        if (size == 0) {
             return null;
         }
         nextFirst = onePlus(nextFirst);
         T tmp = items[nextFirst];
         items[nextFirst] = null;
-        double usage = ((double) size) / items.length;
-        if ((items.length > 16) && (usage < 0.25)){shrink();}
         size -= 1;
+        double usage = ((double) size) / items.length;
+        if ((items.length > 16) && (usage < 0.25)) {
+            shrink();
+        }
         return tmp;
     }
 
-    public T removeLast(){
-        if (size == 0){
+    public T removeLast() {
+        if (size == 0) {
             return null;
         }
         nextLast = oneMinus(nextLast);
         T tmp = items[nextLast];
         items[nextLast] = null;
-        double usage = ((double) size) / items.length;
-        if ((items.length > 16) && (usage < 0.25)){shrink();}
         size -= 1;
+        double usage = ((double) size) / items.length;
+        if ((items.length > 16) && (usage < 0.25)) {
+            shrink();
+        }
         return tmp;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public void printDeque(){
+    public void printDeque() {
         int currentIndex = onePlus(nextFirst);
-        while ((items[currentIndex] != null) && (currentIndex != nextLast)){
+        while ((items[currentIndex] != null) && (currentIndex != nextLast)) {
             System.out.print(items[currentIndex]+" ");
             currentIndex = onePlus(currentIndex);
         }
     }
 
-    public T get(int index){
-        if (index >= size){
+    public T get(int index) {
+        if (index >= size) {
             return null;
         }
         int pos = ((nextFirst >= nextLast) ? 1 + index - items.length + nextFirst : nextFirst + index + 1);
