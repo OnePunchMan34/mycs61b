@@ -51,14 +51,14 @@ public class ArrayDeque<T> {
     private void shrink() {
         T[] a = (T[]) new Object[size + 2];
         if (nextFirst < nextLast) {
-            System.arraycopy(items, nextFirst + 1, a, 0, size);
+            System.arraycopy(items, nextFirst + 1, a, 1, size);
             items = a;
             nextFirst = 0;
             nextLast = size + 1;
         } else {
             //nextLast = nextLast;
             System.arraycopy(items, 0, a, 0, nextLast);
-            System.arraycopy(items, onePlus(nextFirst), a,nextLast + 2,size - nextLast);
+            System.arraycopy(items, onePlus(nextFirst), a, nextLast + 2, size - nextLast);
             items = a;
             nextFirst = nextLast + 1;
         }
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
         int pos;
         pos = nextFirst + index + 1;
         if (nextFirst >= nextLast) {
-            if (pos > items.length -1 ) {
+            if (pos > items.length - 1) {
                 pos -= items.length;
             }
         }
