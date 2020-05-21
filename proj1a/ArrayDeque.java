@@ -20,7 +20,6 @@ public class ArrayDeque<T> {
     }
 
     private void expand() {
-        // ?
         T[] a = (T[]) new Object[4 * size];
         System.arraycopy(items, 0, a, 0, nextLast);
         if (nextFirst < items.length - 1) {
