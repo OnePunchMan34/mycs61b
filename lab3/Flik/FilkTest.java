@@ -14,8 +14,8 @@ public class FilkTest {
         int b2 = 6;
         boolean expected2 = false;
 
-        assertTrue(c1.isSameNumber(a1,b1));
-        assertFalse(c2.isSameNumber(a2,b2));
+        assertTrue(c1.isSameNumber(a1, b1));
+        assertFalse(c2.isSameNumber(a2, b2));
 
     }
 }

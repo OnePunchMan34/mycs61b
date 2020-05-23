@@ -70,8 +70,8 @@ public class IntListTest {
 
     @Test(timeout = 1000)
     public void testReverse() {
-        IntList myList1 = IntList.of(0,1,2,3);
-        IntList expectedList1 = IntList.of(3,2,1,0);
+        IntList myList1 = IntList.of(0, 1, 2, 3);
+        IntList expectedList1 = IntList.of(3, 2, 1, 0);
 
         IntList myList2 = IntList.of(0);
         IntList expectedList2 = IntList.of(0);
@@ -79,13 +79,13 @@ public class IntListTest {
         IntList myList3 = null;
         IntList expectedList3 = IntList.of();
 
-        assertEquals(expectedList1,IntList.reverse(myList1));
-        assertEquals(expectedList2,IntList.reverse(myList2));
-        assertEquals(expectedList3,IntList.reverse(myList3));
+        assertEquals(expectedList1, IntList.reverse(myList1));
+        assertEquals(expectedList2, IntList.reverse(myList2));
+        assertEquals(expectedList3, IntList.reverse(myList3));
 
-        IntList myList4 = IntList.of(0,1,2,3);
+        IntList myList4 = IntList.of(0, 1, 2, 3);
 
-        assertNotEquals(myList4,IntList.reverse(myList4));
+        assertNotEquals(myList4, IntList.reverse(myList4));
     }
 
     /** If you're running this from the command line, you'll need
