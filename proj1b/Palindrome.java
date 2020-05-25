@@ -1,5 +1,5 @@
 public class Palindrome {
-    public Deque<Character> wordToDeque(String word){
+    public Deque<Character> wordToDeque(String word) {
         if (word == null) {
             return null;
         }
@@ -13,7 +13,7 @@ public class Palindrome {
 
     public boolean isPalindrome(String word) {
         Deque<Character> wDeque = wordToDeque(word);
-        if (wDeque == null){
+        if (wDeque == null) {
             return true;
         }
         while (wDeque.size() > 1) {
@@ -27,7 +27,7 @@ public class Palindrome {
 
     }
 
-    public boolean isPalindrome( String word, CharacterComparator cc) {
+    public boolean isPalindrome(String word, CharacterComparator cc) {
         Deque<Character> wDeque = wordToDeque(word);
         if (wDeque == null) {
             return true;
